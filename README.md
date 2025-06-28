@@ -37,16 +37,8 @@ Codul sursă complet este disponibil pe GitHub:
 - Se verifică fișierul `db.php` să conțină următoarele date de conectare:
   - server: `localhost`
   - utilizator: `root`
-  - parolă: *(goală)*
+  - parolă: `root`
   - baza de date: `feedback_scoala`
-- Nu este nevoie de compilare pentru backend. Deschiderea WAMP și plasarea fișierelor în `www` sunt suficiente pentru funcționare.
 
 ---
-
-## Alte detalii
-
-- Aplicația este complet funcțională local, rulând simultan Angular (`ng serve`) și WAMP.
-- Codul este împărțit clar în frontend (`src/`) și backend (`api/`).
-- Nu s-au folosit fișiere binare sau compilate în GitHub.
-- Partea de backend (PHP + SQL) este inclusă complet în repository, în subfolderul `api`.
 
