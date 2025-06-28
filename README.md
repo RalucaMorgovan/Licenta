@@ -4,7 +4,7 @@ Acest proiect este o aplicație web pentru evaluarea și monitorizarea feedback-
 
 ## Adresa repository
 
-Codul sursă complet (fără fișiere binare) este disponibil pe GitHub:  
+Codul sursă complet este disponibil pe GitHub:  
 **https://github.com/RalucaMorgovan/Licenta**
 
 ---
