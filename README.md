@@ -1,27 +1,52 @@
 # FeedbackScoala
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Acest proiect este o aplicație web pentru evaluarea și monitorizarea feedback-ului elev–profesor, realizată în cadrul lucrării de licență.
 
-## Development server
+## Adresa repository
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Codul sursă complet (fără fișiere binare) este disponibil pe GitHub:  
+**https://github.com/RalucaMorgovan/Licenta**
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tehnologii utilizate
 
-## Build
+- **Frontend:** Angular 16  
+- **Backend:** PHP (WAMP)  
+- **Bază de date:** MySQL  
+- **Instrumente folosite:** Visual Studio Code, phpMyAdmin, GitHub
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## Pașii de instalare și rulare a aplicației
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 1. Frontend (Angular)
 
-## Running end-to-end tests
+- Se clonează repository-ul de pe GitHub.
+- Se deschide folderul proiectului în Visual Studio Code.
+- Se rulează comanda `npm install` pentru instalarea dependențelor.
+- Se pornește aplicația cu comanda: `ng serve`.
+- Se accesează aplicația în browser la adresa: **http://localhost:4200/**.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 2. Backend (PHP + MySQL)
 
-## Further help
+- Se pornește serverul WAMP.
+- Se copiază folderul `api` (care conține fișierele PHP) în `C:/wamp64/www/feedback_scoala/api`.
+- Se accesează phpMyAdmin și se creează baza de date `feedback_scoala`.
+- Se importă fișierul `feedback_scoala.sql` în baza de date.
+- Se verifică fișierul `db.php` să conțină următoarele date de conectare:
+  - server: `localhost`
+  - utilizator: `root`
+  - parolă: *(goală)*
+  - baza de date: `feedback_scoala`
+- Nu este nevoie de compilare pentru backend. Deschiderea WAMP și plasarea fișierelor în `www` sunt suficiente pentru funcționare.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## Alte detalii
+
+- Aplicația este complet funcțională local, rulând simultan Angular (`ng serve`) și WAMP.
+- Codul este împărțit clar în frontend (`src/`) și backend (`api/`).
+- Nu s-au folosit fișiere binare sau compilate în GitHub.
+- Partea de backend (PHP + SQL) este inclusă complet în repository, în subfolderul `api`.
+
