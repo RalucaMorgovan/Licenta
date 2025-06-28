@@ -1,6 +1,6 @@
 # FeedbackScoala
 
-Acest proiect este o aplicație web pentru evaluarea și monitorizarea feedback-ului elev–profesor, realizată în cadrul lucrării de licență.
+Acest proiect este o aplicație web pentru evaluarea cadrelor didactice.
 
 ## Adresa repository
 
