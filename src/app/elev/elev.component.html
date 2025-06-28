@@ -1,0 +1,44 @@
+<div class="elev-wrapper">
+  <button class="btn-logout" (click)="logout()">Logout</button>
+  <div class="decor-circle decor-circle--one"></div>
+  <div class="decor-circle decor-circle--two"></div>
+  <div class="elev-card">
+    <h2 class="title">
+      Bine ai venit, {{ prenume }} {{ nume }} - {{ clasa }}
+    </h2>
+
+    <div class="table-responsive">
+      <table class="table-elev">
+        <thead>
+          <tr>
+            <th>Materie</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of materii">
+            <td>{{ m.materie }}</td>
+            <td>
+              <button
+                class="btn-evalueaza"
+                (click)="evalueaza(m.materie_clasa_id)"
+                [disabled]="!feedbackActiv || m.completat"
+              >
+                <ng-container *ngIf="m.completat; else evalTpl">
+                  ✅ Completat
+                </ng-container>
+                <ng-template #evalTpl>
+                  {{ feedbackActiv ? 'Evaluează' : 'Închis' }}
+                </ng-template>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p *ngIf="!feedbackActiv" class="feedback-closed">
+      Feedback-ul este momentan închis.
+    </p>
+  </div>
+</div>

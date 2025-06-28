@@ -1,0 +1,217 @@
+
+$primary:      #6a11cb;
+$secondary:    #2575fc;
+$wrapper-bg:   linear-gradient(135deg, $primary, $secondary);
+$container-bg: #fff;
+$danger:       #dc3545;
+$success:      #28a745;
+
+// animație fade-in
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// wrapper full-screen
+.login-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: $wrapper-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+
+  .decor-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+
+    &--one {
+      width: 240px; height: 240px;
+      top: -100px; left: -100px;
+    }
+    &--two {
+      width: 340px; height: 340px;
+      bottom: -120px; right: -120px;
+    }
+  }
+}
+
+// container central – și mai mărit
+.login-container {
+  background: $container-bg;
+  border-radius: 1rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  padding: 4rem 3rem;       // padding mărit
+  width: 100%;
+  max-width: 520px;         // max-width crescut
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.6s ease-out both;
+
+  .logo {
+    width: 200px;           // logo mai mare
+    margin: 0 auto 1.5rem;
+    display: block;
+    height: 100px;
+  }
+
+  .title {
+    font-size: 2.2rem;       // titlu mai mare
+    color: darken($primary, 10%);
+    margin-bottom: 2rem;     // spațiu mai mare
+    font-weight: 600;
+  }
+
+  form {
+    .form-group {
+      position: relative;
+      margin-bottom: 2rem;   // distanță mai mare
+
+      .icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: lighten($primary, 20%);
+        font-size: 1.4rem;   // iconiță mai mare
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 1rem 1rem 1rem 3rem; // padding mărit
+        border: 1px solid lighten($primary, 40%);
+        border-radius: 0.5rem;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: $primary;
+          box-shadow: none;
+          outline: none;
+        }
+      }
+
+      .feedback {
+        font-size: 0.9rem;
+        color: $danger;
+        margin-top: 0.5rem;
+        text-align: left;
+      }
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: $primary;
+      color: $container-bg;
+      border: none;
+      padding: 1rem;           // buton mai mare
+      border-radius: 0.5rem;
+      font-size: 1.2rem;       // text buton mai mare
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+
+      &:hover:not(:disabled) {
+        background: $secondary;
+        transform: translateY(-2px);
+      }
+      &:disabled {
+        background: lighten($primary, 40%);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .forgot-pass {
+    margin-top: 1.75rem;
+    font-size: 1rem;
+
+    a {
+      color: $primary;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover { color: $secondary; }
+    }
+  }
+
+  .reset-pass {
+    margin-top: 2.5rem;
+    text-align: left;
+
+    h3 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: darken($primary, 10%);
+      font-size: 1.5rem;     // titlu reset mai mare
+    }
+
+    form {
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      input {
+        width: 100%;
+        padding: 0.85rem 1rem; // padding reset mărit
+        margin-bottom: 1.5rem;
+        border: 1px solid lighten($primary, 40%);
+        border-radius: 0.5rem;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: $primary;
+          box-shadow: none;
+          outline: none;
+        }
+      }
+      button {
+        @extend .btn-submit;
+        margin-top: 0.75rem;
+      }
+    }
+
+    .error-message,
+    .success-message {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .error-message { color: $danger; }
+    .success-message { color: $success; }
+
+    a {
+      display: block;
+      margin-top: 1.25rem;
+      text-align: center;
+      color: $secondary;
+      text-decoration: none;
+      font-size: 1rem;
+
+      &:hover { color: $primary; }
+    }
+  }
+
+  .error-message {
+    margin-top: 1.5rem;
+    color: $danger;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
+
+// responsive
+@media (max-width: 600px) {
+  .login-container {
+    padding: 3rem 2rem;
+    max-width: 95%;
+    .logo { width: 80px; }
+  }
+}

@@ -1,0 +1,102 @@
+<div class="feedback-form-wrapper">
+  <div class="feedback-form-container">
+    <h2 class="form-title">
+      Feedback la materia <em>{{ materieNume }}</em>
+    </h2>
+
+
+    <div class="scale-legend">
+      <strong>Scala de evaluare:</strong>
+      <ul>
+        <li><strong>1</strong> - Nu sunt deloc de acord</li>
+        <li><strong>2</strong> - Puțin de acord</li>
+        <li><strong>3</strong> - Neutru</li>
+        <li><strong>4</strong> - De acord</li>
+        <li><strong>5</strong> - Sunt total de acord</li>
+      </ul>
+    </div>
+
+<form (ngSubmit)="trimiteFeedback()" #feedbackForm="ngForm">
+<div
+  class="question-block"
+  *ngFor="let q of intrebarile | slice:0:16; let i = index"
+>
+  <p class="question-text">
+    <strong>{{ i + 1 }}.</strong> {{ q }}
+  </p>
+  <div class="answers">
+    <label *ngFor="let nota of [1,2,3,4,5]" class="form-check form-check-inline">
+      <input
+        type="radio"
+        class="form-check-input"
+        name="q{{ i }}"
+        [value]="nota"
+        [(ngModel)]="raspunsuri[i]"
+        required
+      />
+      <span class="form-check-label">{{ nota }}</span>
+    </label>
+  </div>
+  <hr />
+</div>
+
+<div class="question-block">
+    <p class="question-text">
+      <strong>17.</strong> Mi-aș dori ca la această disciplină să…
+    </p>
+    <textarea
+      class="form-control"
+      rows="3"
+      name="dorinta"
+      [(ngModel)]="dorinta"
+      required
+      placeholder="Scrie aici…"
+    ></textarea>
+    <hr />
+  </div>
+
+  <div class="question-block">
+    <p class="question-text">
+      <strong>18.</strong> Dacă ar fi să spui profesorului un gând după acest semestru, care ar fi acesta?
+    </p>
+    <textarea
+      class="form-control"
+      rows="3"
+      name="gand_profesor"
+      [(ngModel)]="gandProfesor"
+      required
+      placeholder="Scrie aici…"
+    ></textarea>
+    <hr />
+  </div>
+
+  <div class="question-block">
+    <p class="question-text">
+      <strong>19.</strong> În acest semestru, am fost prezent la:
+    </p>
+    <select
+      class="form-select"
+      name="prezenta"
+      [(ngModel)]="prezenta"
+      required
+    >
+      <option value="" disabled selected>Alege procentajul</option>
+      <option value="25%">25% din ore</option>
+      <option value="50%">50% din ore</option>
+      <option value="75%">75% din ore</option>
+      <option value=">90%">Peste 90% din ore</option>
+    </select>
+    <hr />
+  </div>
+      <button 
+        type="submit" 
+        class="btn btn-submit" 
+        [disabled]="feedbackForm.invalid"
+      >
+        Trimite Feedback
+      </button>
+    </form>
+
+    <p class="success-message" *ngIf="mesaj">{{ mesaj }}</p>
+  </div>
+</div>

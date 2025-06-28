@@ -1,0 +1,83 @@
+<div class="login-wrapper">
+  <div class="decor-circle decor-circle--one"></div>
+  <div class="decor-circle decor-circle--two"></div>
+
+  <div class="login-container">
+    <img src="assets/colegiu.png" alt="Logo Colegiu" class="logo" />
+    <h2 class="title">Autentificare</h2>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" novalidate>
+      <div class="form-group">
+        <i class="bi bi-envelope-fill icon"></i>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          #emailModel="ngModel"
+        />
+        <div class="feedback" *ngIf="emailModel.invalid && emailModel.touched">
+          Te rog introdu un email valid.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <i class="bi bi-lock-fill icon"></i>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Parolă"
+          [(ngModel)]="parola"
+          name="parola"
+          required
+          minlength="6"
+          #passwordModel="ngModel"
+        />
+        <div class="feedback" *ngIf="passwordModel.invalid && passwordModel.touched">
+          Parola trebuie să aibă minim 6 caractere.
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-submit"
+        [disabled]="loginForm.invalid"
+      >
+        Conectează-te
+      </button>
+    </form>
+    
+  <p *ngIf="!showForgot" class="forgot-pass">
+    <a (click)="showForgot = true">Ai uitat parola?</a>
+  </p>
+<div *ngIf="showForgot" class="reset-pass">
+  <h3>Resetează-ți parola</h3>
+  <form (ngSubmit)="resetParola()">
+    <label>Email:</label>
+    <input 
+      type="email" 
+      [(ngModel)]="resetEmail" 
+      name="resetEmail" 
+      required />
+
+    <label>Parolă nouă:</label>
+    <input 
+      type="password" 
+      [(ngModel)]="resetNouaParola" 
+      name="resetNouaParola" 
+      required />
+
+    <button type="submit">Resetează parola</button>  </form>
+  <p *ngIf="resetMsg" [style.color]="resetStatus==='success' ? 'green' : 'red'">
+    {{ resetMsg }}
+  </p>
+  <p><a (click)="showForgot = false">← Înapoi la Login</a></p>
+</div>
+    
+    <div *ngIf="mesaj" class="error-message">
+      {{ mesaj }}
+    </div>
+  </div>
+</div>

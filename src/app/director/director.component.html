@@ -1,0 +1,180 @@
+<div class="feedback-wrapper">
+  <button class="btn-logout" (click)="logout()">Logout</button>
+  <div class="decor-circle decor-circle--one"></div>
+  <div class="decor-circle decor-circle--two"></div>
+
+  <div class="feedback-container">
+    <section class="section select-clasa">
+      <h2>Selectează o clasă</h2>
+      <div class="form-row align-center">
+        <select class="form-select" [(ngModel)]="clasaSelectata" name="clasaSelectata">
+          <option value="" disabled selected>-- Alege clasa --</option>
+          <option *ngFor="let c of clase" [value]="c.id">{{ c.nume }}</option>
+        </select>
+        <button class="btn btn-action" (click)="cautaFeedback()">Vezi feedback</button>
+      </div>
+    </section>
+
+    <hr />
+
+    <section class="section rezultate">
+      <h2>Rezultate Feedback {{ getClasaNume() }}</h2>
+      <p *ngIf="totalElevi !== null" class="stats">
+        Clasa <strong>{{ getClasaNume() }}</strong>:
+        din <strong>{{ totalElevi }}</strong> elevi,
+        au votat <strong>{{ votanti }}</strong>
+        (<strong>{{ procentaj }}%</strong>).
+      </p>
+
+      <div class="table-responsive" *ngIf="feedbackuri.length > 0; else noFeedback">
+        <table class="table table-striped">
+          <thead class="table-primary">
+            <tr>
+              <th>Cod</th><th>Data</th><th>Materie</th><th>Profesor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of feedbackuri">
+              <td>{{ f.cod_feedback }}</td>
+              <td>{{ f.data | date:'short' }}</td>
+              <td>{{ f.materie }}</td>
+              <td>{{ f.profesor }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noFeedback>
+        <p class="no-data">Nu există feedback pentru clasă.</p>
+      </ng-template>
+    </section>
+
+
+   <section class="section feedback-profesor">
+      <h2>Selectează profesor</h2>
+      <div class="form-row">
+        <select
+          class="form-select"
+          [(ngModel)]="profesorSelectat"
+          name="profesorSelectat"
+        >
+          <option [ngValue]="null" disabled>-- Alege profesor --</option>
+          <option *ngFor="let p of profesori" [ngValue]="p.id">{{ p.nume }}</option>
+        </select>
+        <button class="btn-action btn-feedback" (click)="vedeFeedbackProfesor()">
+          Vezi feedback
+        </button>
+      </div>
+
+      <div *ngIf="detailedFeedback.length > 0" class="detailed-feedback">
+        <h3>
+          Detaliu feedback pentru
+          <em>{{ getProfesorNume(profesorSelectat!) }}</em>
+        </h3>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Cod</th>
+                <th>Data</th>
+                <th>Materie</th>
+                <th>Clasă</th>
+                <th *ngFor="let q of questions; let i = index">
+                  Întrebare {{ i+1 }}
+                </th>
+                <th>Media</th>
+                <th>Dorință</th>
+                <th>Gând profesor</th>
+                <th>Prezență</th>
+              </tr>
+              <tr>
+                <th colspan="4"></th>
+                <th *ngFor="let q of questions" class="text-wrap">{{ q }}</th>
+                <th></th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fb of detailedFeedback">
+                <td>{{ fb.cod_feedback }}</td>
+                <td>{{ fb.data | date:'short' }}</td>
+                <td>{{ fb.materie }}</td>
+                <td>{{ fb.clasa }}</td>
+                <td
+                  *ngFor="let _ of questions; let i = index"
+                  class="text-end"
+                >
+                  {{ fb['q'+(i+1)] }}
+                </td>
+       <td class="text-end">
+  {{
+    (
+      fb.q1  + fb.q2  + fb.q3  + fb.q4  + fb.q5  +
+      fb.q6  + fb.q7  + fb.q8  + fb.q9  + fb.q10 +
+      fb.q11 + fb.q12 + fb.q13 + fb.q14 + fb.q15 + fb.q16
+    ) / questions.length
+    | number:'1.2-2'
+  }}
+</td>
+
+          <td class="text-wrap">{{ fb.dorinta       }}</td>
+<td class="text-wrap">{{ fb.gand_profesor }}</td>
+<td class="text-wrap">{{ fb.prezenta      }}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p
+        class="text-muted"
+        *ngIf="profesorSelectat && detailedFeedback.length === 0"
+      >
+        Profesorul
+        <strong>{{ getProfesorNume(profesorSelectat!) }}</strong>
+        nu are niciun feedback.
+      </p>
+    </section>
+
+
+    <hr >
+
+<section class="section inchidere">
+  <h2>Închidere feedback</h2>
+  <p class="status">
+    Stare feedback:
+    <span [ngClass]="feedbackActiv ? 'status-open' : 'status-closed'">
+      {{ feedbackActiv ? 'DESCHIS' : 'ÎNCHIS' }}
+    </span>
+  </p>
+
+  <div class="form-row">
+    <button class="btn-action" (click)="toggleStare()">
+      {{ feedbackActiv ? 'Închide feedback' : 'Deschide feedback' }}
+    </button>
+  </div>
+
+  <div class="form-row">
+    <label for="dataInchidereLocal" class="form-label">
+      Data și ora închiderii:
+    </label>
+    <input
+      id="dataInchidereLocal"
+      type="datetime-local"
+      class="form-control"
+      [(ngModel)]="dataInchidereLocal"
+      name="dataInchidereLocal"
+    />
+    <button class="btn-action" (click)="toggleStare()">
+      Salvează
+    </button>
+  </div>
+
+  <p *ngIf="dataInchidere" class="auto-close">
+    Se închide automat la: {{ dataInchidere }}
+  </p>
+</section>
+    <hr />
+
+
+  </div>
+</div>

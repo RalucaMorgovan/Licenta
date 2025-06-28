@@ -1,0 +1,37 @@
+<div class="profesor-wrapper">
+  <div class="decor-circle decor-circle--one"></div>
+  <div class="decor-circle decor-circle--two"></div>
+
+  <button class="btn-logout" (click)="logout()">Logout</button>
+
+  <div class="profesor-card">
+    <header class="profesor-header">
+      <h1>Bun venit!</h1>
+    </header>
+
+    <section class="materii-list">
+      <h2 class="section-title">Materii predate</h2>
+
+      <div class="table-responsive" *ngIf="materii.length; else noMaterii">
+        <table class="table-profesor">
+          <thead>
+            <tr>
+              <th>Materie</th>
+              <th>Clasă</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of materii">
+              <td>{{ m.materie }}</td>
+              <td>{{ m.clasa }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noMaterii>
+        <p class="no-data">{{ mesaj || 'Nu ai nicio materie asignată.' }}</p>
+      </ng-template>
+    </section>
+  </div>
+</div>
